@@ -9,7 +9,7 @@ import PawIcon from "../assets/pet.png";
 import WheelchairIcon from "../assets/accessibility.png";
 import FBIcon from "../assets/facebook-fb.gif";
 import InstaIcon from "../assets/instagram1.gif";
-import XIcon from "../assets/x.png";
+import XIcon from "../assets/twitter.webp";
 import LeftCorner from "../assets/left_corner.png";
 import RightCorner from "../assets/right_corner.png";
 import ManImage from "../assets/man.png";
@@ -218,7 +218,7 @@ function Footer() {
                   <div className="h-7 w-7 md:h-8 md:w-8 bg-white rounded-full flex items-center justify-center">
                     <img src={InstaIcon} alt="" className="h-4 w-4 md:h-5 md:w-5 cursor-pointer rounded-full hover:scale-105 transition-transform"/>
                   </div>
-                  <img src={XIcon} alt="" className="h-6 w-6 md:h-7 md:w-7 cursor-pointer invert hover:scale-105 transition-transform" />
+                  <img src={XIcon} alt="" className="h-7 w-7 md:h-8 md:w-8  rounded-full cursor-pointer  hover:scale-105 transition-transform" />
                 </div>
 
                 <a href="https://webappssoft.com/" target="_blank" rel="noopener noreferrer">
