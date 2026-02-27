@@ -57,31 +57,16 @@ const Navbar = ({ isMenuOpen, toggleMenu }) => {
         {/* Center Logo */}
         <motion.div
           className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto"
-          initial={{ scale: 0.6, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6, ease: "backOut" }}
+          
         >
           <Link to="/" className="flex items-center justify-center">
-            <motion.div
-              className="relative w-full flex items-center justify-center cursor-pointer select-none"
-
-              // Small lift effect when hovering the logo--------------------------------------------------------------------------------
-              whileHover={{
-                y: -5,
-                transition: { type: "spring", stiffness: 400, damping: 10 },
-              }}
-              whileTap={{
-                y: -25,
-                scale: 1.05,
-                transition: { type: "spring", stiffness: 500, damping: 15 },
-              }}
-            >
+            
               <img
                 src={Logo}
                 alt="KDR GROUP"
                 className="h-7 sm:h-8 md:h-10 lg:h-12 w-auto object-contain hover:brightness-0 invert opacity-90"
               />
-            </motion.div>
+          
           </Link>
         </motion.div>
 
