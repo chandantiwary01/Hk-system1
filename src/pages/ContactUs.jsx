@@ -1,14 +1,31 @@
 import React from 'react';
 
 // Icons and Images
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import {  ChevronRight } from 'lucide-react';
 import RightCorner from "../assets/right_corner.png"; 
 import LeftCorner from "../assets/left_corner.png";
 import hero from "../assets/BG_C.png";
+import hero2 from "../assets/hero2.png";
+import hero3 from "../assets/hero3.png";
+import hero4 from "../assets/hero4.png";
 import agent from "../assets/agent.jpg";
 import phoneIcon from "../assets/call_icon.png"; 
 
 const ContactUs = () => {
+
+  const heroImages = [hero, hero2, hero3, hero4];
+  const [currentHero, setCurrentHero] = React.useState(0);
+
+ // This timer changes the gallery hero image every 4 seconds
+React.useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentHero((prev) => (prev + 1) % heroImages.length);
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, []);
+
+
   return (
     <div className="bg-black w-full text-white font-['Inter',_sans-serif]">
       {/* Top Border */}
@@ -19,12 +36,19 @@ const ContactUs = () => {
        
         <div className="border-b border-white w-full"></div>  
 
-        {/*  Bg Image */}
-        <img 
-          src={hero}
-          alt="Luxury Interior Hero" 
-          className="w-full h-full object-cover brightness-[0.85]" 
-        />
+        {/*  Bg Image ANIMATION-------------------------------------------------------------------------------- */}
+         <div className="absolute inset-0">
+          {heroImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt="Hero"
+              className={`absolute inset-0 w-full h-full object-cover brightness-[0.7] transition-opacity duration-1000 ${
+                index === currentHero ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+        </div>
 
         {/* Dark overlay to make text easier to read */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 z-10"></div>

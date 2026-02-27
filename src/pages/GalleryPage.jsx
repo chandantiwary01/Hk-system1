@@ -5,12 +5,17 @@ import { useState, useEffect } from "react";
 import RightCorner from "../assets/right_corner.png";
 import LeftCorner from "../assets/left_corner.png";
 import hero from "../assets/BG_C.png";
+import hero2 from "../assets/hero2.png";
+import hero3 from "../assets/hero3.png";
+import hero4 from "../assets/hero4.png";
 import left_G from "../assets/left_G.png";
 import center_G from "../assets/center_G.png";
 import right_G from "../assets/right_G.png";
 
 const GalleryPage = () => {
-  
+  const heroImages = [hero, hero2, hero3, hero4];
+  const [currentHero, setCurrentHero] = React.useState(0);
+
   const images = [left_G, center_G, right_G];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -18,13 +23,21 @@ const GalleryPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 3000); 
+    }, 3000);
     return () => clearInterval(interval);
   }, [images.length]);
 
+  // This timer changes the gallery hero image every 4 seconds
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHero((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-black w-full text-white font-['Inter',_sans-serif] overflow-x-hidden">
-      
       {/* Animation for the bottom marqueee scrolling text */}
       <style>{`
         @keyframes marquee {
@@ -42,11 +55,18 @@ const GalleryPage = () => {
 
       {/* 1. HERO SECTION */}
       <div className="max-w-[1427px] mx-auto relative h-[420px] md:h-[550px] lg:h-[650px] border-l border-r border-white overflow-hidden">
-        <img
-          src={hero}
-          alt="Luxury Interior Hero"
-          className="w-full h-full object-cover brightness-[0.7]"
-        />
+        <div className="absolute inset-0">
+          {heroImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt="Hero"
+              className={`absolute inset-0 w-full h-full object-cover brightness-[0.7] transition-opacity duration-1000 ${
+                index === currentHero ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+        </div>
         <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center text-white px-4 pt-40 md:pt-60 lg:pt-95">
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 drop-shadow-lg">
             Gallery
@@ -64,7 +84,6 @@ const GalleryPage = () => {
       <section className="bg-black text-white w-full select-none">
         <div className="h-12 md:h-16 lg:h-20 bg-black border-b border-white"></div>
 
-        
         <div className="w-full border-b border-white bg-black">
           <div className="max-w-[1427px] mx-auto border-l border-r border-white relative py-6 md:py-8 flex items-center justify-center bg-[#4D4D4D]">
             <img
@@ -156,7 +175,6 @@ const GalleryPage = () => {
       {/* 5. GALLERY GRID SECTION ==================================================================================================*/}
       <section className="w-full bg-black text-white font-sans">
         <div className="max-w-[1427px] mx-auto border-l border-r border-white bg-[#4D4D4D] relative overflow-hidden">
-          
           <div className="relative py-6 md:py-8 border-b border-white flex items-center">
             <img
               src={RightCorner}
@@ -175,14 +193,13 @@ const GalleryPage = () => {
 
           <div className="flex flex-col w-full">
             <div className="flex flex-col lg:flex-row items-stretch border-b border-white min-h-[400px] lg:min-h-[550px]">
-              
               <div className="hidden lg:block w-[60px] border-r border-white shrink-0"></div>
 
               {/*  LEFT IMAGE */}
               <div className="flex-1 border-b lg:border-b-0 lg:border-r border-white flex items-end justify-center py-8 lg:pb-10 px-4">
                 <div className="w-full max-w-[280px] md:max-w-[340px] aspect-[1/1] border-2 border-white shadow-xl overflow-hidden">
                   <img
-                    src={images[currentIndex % images.length]} 
+                    src={images[currentIndex % images.length]}
                     alt="Left Gallery"
                     className="w-full h-full object-cover transition-opacity duration-700"
                   />
@@ -195,7 +212,7 @@ const GalleryPage = () => {
               <div className="flex-[1.4] border-b lg:border-b-0 lg:border-r border-white flex items-center justify-center p-4 md:p-6">
                 <div className="w-full max-w-[420px] lg:max-w-[500px] aspect-[1.1/1] border-2 border-white shadow-2xl relative">
                   <img
-                    src={images[(currentIndex + 1) % images.length]} 
+                    src={images[(currentIndex + 1) % images.length]}
                     alt="Center Gallery"
                     className="w-full h-full object-cover transition-opacity duration-700"
                   />
@@ -206,7 +223,7 @@ const GalleryPage = () => {
                         key={index}
                         onClick={() => setCurrentIndex(index)}
                         className={`cursor-pointer rounded-full transition-all duration-300 ${
-                          index === (currentIndex + 1) % images.length 
+                          index === (currentIndex + 1) % images.length
                             ? "w-2.5 h-2.5 bg-black border-2 border-white scale-110"
                             : "w-2 h-2 bg-white/50 hover:bg-white"
                         }`}
@@ -228,7 +245,7 @@ const GalleryPage = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="hidden lg:block w-[5px] border-r border-white shrink-0"></div>
               <div className="hidden lg:block w-[60px] shrink-0"></div>
             </div>
@@ -244,26 +261,36 @@ const GalleryPage = () => {
         </div>
       </section>
 
-      {/* 6. BOTTOM MARQUEE SECTION */}
+      {/* 6. BOTTOM MARQUEE SECTION ===============================================================================================*/}
       <div className="bg-black border-b mt-20 border-white"></div>
       <div className="max-w-[1427px] mx-auto border-l border-r border-white bg-[#4D4D4D] overflow-hidden">
-        
         <div className="animate-marquee py-8 md:py-10">
           {/* Strip Loop Set 1 */}
           <div className="flex items-center gap-20 md:gap-40 px-10">
-            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">🌟 Built for Startups 🌟</h4>
-            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">🌟 Built for Couples 🌟</h4>
-            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">🌟 Built for Families 🌟</h4>
+            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">
+              🌟 Built for Startups 🌟
+            </h4>
+            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">
+              🌟 Built for Couples 🌟
+            </h4>
+            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">
+              🌟 Built for Families 🌟
+            </h4>
           </div>
 
           {/* Strip Loop Set 2  */}
           <div className="flex items-center gap-20 md:gap-30 px-10">
-            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">🌟 Built for Startups 🌟</h4>
-            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">🌟 Built for Couples 🌟</h4>
-            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">🌟 Built for Families 🌟</h4>
+            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">
+              🌟 Built for Startups 🌟
+            </h4>
+            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">
+              🌟 Built for Couples 🌟
+            </h4>
+            <h4 className="text-lg md:text-2xl lg:text-3xl font-bold whitespace-nowrap">
+              🌟 Built for Families 🌟
+            </h4>
           </div>
         </div>
-
       </div>
 
       <div className="h-12 md:h-20 bg-black border-t border-white"></div>
