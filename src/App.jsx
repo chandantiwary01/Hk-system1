@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 
 
 
+import ScrollToTopButton from "./components/ScrollButton";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
@@ -32,7 +33,7 @@ function App() {
 </AnimatePresence>
         
        
-        {isMenuOpen && <Menu toggleMenu={toggleMenu} />}
+        
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -43,6 +44,7 @@ function App() {
            
           </Routes>
         </main>
+         <ScrollToTopButton />
         <Footer />
       </div>
     </Router>
