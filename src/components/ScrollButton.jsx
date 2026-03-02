@@ -33,14 +33,19 @@ const ScrollToTopButton = () => {
       className="
         fixed 
         right-4 sm:right-6 md:right-10 
-        bottom-6 sm:bottom-8 md:bottom-12 
+        bottom-6 sm:bottom-8 md:bottom-12 pb-safe
         z-[999]
-        w-[25px] h-[25px] sm:w-[30px] sm:h-[30px] md:w-[40px] md:h-[40px]
+        w-[35px] h-[35px] sm:w-[35px] sm:h-[35px] md:w-[45px] md:h-[45px]
         border border-white/30 
-        bg-black backdrop-blur-md
+        bg-black/90 backdrop-blur-md
         rounded-full 
         flex items-center justify-center
-        hover:bg-white/10 hover:scale-110
+
+         hover:bg-white/10 
+        active:bg-white/20 
+        hover:scale-110 
+        active:scale-95
+
         transition-all duration-300 ease-in-out
         shadow-lg
       "

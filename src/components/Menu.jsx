@@ -51,11 +51,11 @@ const Menu = ({ toggleMenu }) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="fixed inset-0 z-[100] bg-black/5 backdrop-blur-sm flex items-start justify-end p-2 sm:p-4 md:p-8 lg:p-10 overflow-y-auto overflow-x-hidden"
+      className="fixed inset-0 z-[100] bg-black/5 backdrop-blur-sm flex items-start justify-end px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-6 lg:p-10 overflow-y-auto overflow-x-hidden"
     >
       
       {/* This is the black box container for the menu */}
-      <div className="relative w-full max-w-[1427px] h-auto min-h-[520px] sm:min-h-[600px] md:h-[698px] bg-black border border-white mt-[50px] sm:mt-[60px] md:mt-[70px] rounded-[16px] sm:rounded-[20px] rounded-bl-[80px] sm:rounded-bl-[140px] md:rounded-bl-[400px] p-4 sm:p-6 md:p-12 lg:p-16 flex flex-col overflow-hidden">
+      <div className="relative w-full max-w-[1427px] mx-auto h-auto min-h-[520px] sm:min-h-[600px] md:h-[698px] bg-black border border-white mt-[50px] sm:mt-[60px] md:mt-[70px] rounded-[16px] sm:rounded-[20px] rounded-bl-[80px] sm:rounded-bl-[140px] md:rounded-bl-[400px] p-5 sm:p-6 md:p-12 lg:p-16 flex flex-col overflow-hidden">
         
         {/* The X button to close the menu */}
         <button 
